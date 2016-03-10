@@ -11,10 +11,10 @@ install:
   - php composer.phar install
 
 script:
-  - php bin/phpunit --coverage-clover clover.xml
+  - php vendor/bin/phpunit --coverage-clover clover.xml
 
 after_script:
-  - php bin/coveralls -vvv
+  - php vendor/bin/coveralls -vvv
 
 notifications:
   email:
