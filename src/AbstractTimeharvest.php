@@ -20,6 +20,7 @@ use Lsv\Timeharvest\Exceptions\AuthenticationFailedException;
 use Lsv\Timeharvest\Exceptions\BodyNotJsonException;
 use Lsv\Timeharvest\Exceptions\Exception;
 use Lsv\Timeharvest\Exceptions\RequireAdminException;
+use Lsv\Timeharvest\Exceptions\StopExecutionException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -82,7 +83,7 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired('_method');
-        $resolver->setAllowedValues('_method', ['GET', 'POST']);
+        $resolver->setAllowedValues('_method', ['GET', 'POST', 'DELETE']);
         $resolver->setDefault('_method', 'GET');
 
         $resolver->setRequired('httpclient');
@@ -152,7 +153,9 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
                     break;
                 case 404:
                     $headers = $e->getResponse()->getHeaders();
-                    if (isset($headers['X-404-Reason'], $headers['X-404-Reason'][0]) && $headers['X-404-Reason'][0] == 'admin_required') {
+                    if (isset($headers['X-404-Reason'], $headers['X-404-Reason'][0])
+                        && $headers['X-404-Reason'][0] == 'admin_required'
+                    ) {
                         throw new RequireAdminException($this->request, $e->getResponse(), 'admin_required');
                     }
 
@@ -220,15 +223,20 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
         try {
             $json = json_decode($response->getBody());
 
-            $this->beforeParseData($json);
+            try {
+                $this->beforeParseData($response, $json);
+            } catch (StopExecutionException $e) {
+                return $e->getData();
+            } catch (Exception $e) {
+                throw $e;
+            }
 
+            $mapper = new \JsonMapper();
             if (is_object($json)) {
-                $mapper = new \JsonMapper();
                 $data = $mapper->map($json, $this->getDocumentClass());
                 $this->afterParseData($data);
                 return $data;
             } elseif (is_array($json)) {
-                $mapper = new \JsonMapper();
                 $data = $mapper->mapArray($json, [], get_class($this->getDocumentClass()));
                 $this->afterParseData($data);
                 return $data;
@@ -263,9 +271,10 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
 
     /**
      * Manipulate the data before the parsing
-     * @param \stdClass|array $data
+     * @param ResponseInterface $response
+     * @param param array|\stdClass $json
      */
-    protected function beforeParseData(&$data)
+    protected function beforeParseData(ResponseInterface $response, &$json)
     {
     }
 

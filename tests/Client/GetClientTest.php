@@ -6,9 +6,9 @@ use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Client\Document\ClientDetails;
 use Lsv\Timeharvest\Client\GetClient;
 use Lsv\Timeharvest\Client\GetClients;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class GetClientTest extends AbstractTest
+class GetClientTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     protected function createRequest($clientId)

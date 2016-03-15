@@ -4,9 +4,9 @@ namespace Lsv\TimeharvestTest\Task;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Task\GetTasks;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class GetTasksTest extends AbstractTest
+class GetTasksTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     public function test_get_tasks()

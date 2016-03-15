@@ -7,9 +7,9 @@ use Lsv\Timeharvest\Project\Document\ProjectDetails;
 use Lsv\Timeharvest\Task\Document\TaskDetails;
 use Lsv\Timeharvest\Timesheet\AddTimesheet;
 use Lsv\Timeharvest\Timesheet\Document\Timesheet;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class AddTimesheetTest extends AbstractTest
+class AddTimesheetTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     public function test_post_timesheet_from_class()

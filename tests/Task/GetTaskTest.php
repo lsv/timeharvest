@@ -5,9 +5,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Task\Document\TaskDetails;
 use Lsv\Timeharvest\Task\GetTask;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class GetTaskTest extends AbstractTest
+class GetTaskTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     protected function createRequest($taskId)

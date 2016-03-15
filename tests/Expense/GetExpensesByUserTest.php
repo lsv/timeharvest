@@ -4,9 +4,9 @@ namespace Lsv\TimeharvestTest\Expense;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Expense\GetExpensesByUser;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class GetExpensesByUserTest extends AbstractTest
+class GetExpensesByUserTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     public function test_get_expenses()

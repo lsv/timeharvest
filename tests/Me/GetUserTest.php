@@ -5,9 +5,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Me\Document\UserDetail;
 use Lsv\Timeharvest\Me\GetMe;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class GetUserTest extends AbstractTest
+class GetUserTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     public function test_get_user()

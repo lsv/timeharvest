@@ -9,7 +9,7 @@ use Lsv\Timeharvest\Exceptions\RequireAdminException;
 use Lsv\Timeharvest\Project\GetProjects;
 use Psr\Http\Message\ResponseInterface;
 
-class TimeHarvestTest extends AbstractTest
+class TimeHarvestTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     /**

@@ -5,9 +5,9 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Client\GetClients;
-use Lsv\TimeharvestTest\AbstractTest;
+use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class GetClientsTest extends AbstractTest
+class GetClientsTimeHarvestTest extends AbstractTimeHarvestTest
 {
 
     public function test_get_clients()
