@@ -30,7 +30,7 @@ class GetClientsTest extends AbstractTest
     }
 
     /**
-     * @expectedException \GuzzleHttp\Exception\ClientException
+     * @expectedException \Lsv\Timeharvest\Exceptions\Exception
      */
     public function test_get_clients_404()
     {

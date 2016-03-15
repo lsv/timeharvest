@@ -1,0 +1,20 @@
+[
+  {
+    "day_entry": {
+      "id": 367231665,
+      "notes": "Some notes.",
+      "spent_at": "2015-07-01",
+      "hours": 0.16,
+      "user_id": 508343,
+      "project_id": 3554414,
+      "task_id": 2086200,
+      "created_at": "2015-08-25T14:31:52Z",
+      "updated_at": "2015-08-25T14:47:02Z",
+      "adjustment_record": false,
+      "timer_started_at": "2015-08-25T14:47:02Z",
+      "is_closed": false,
+      "is_billed": false,
+      "hours_with_timer": 0.16
+    }
+  }
+]

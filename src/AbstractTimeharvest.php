@@ -16,7 +16,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
+use Lsv\Timeharvest\Exceptions\AuthenticationFailedException;
 use Lsv\Timeharvest\Exceptions\BodyNotJsonException;
+use Lsv\Timeharvest\Exceptions\Exception;
+use Lsv\Timeharvest\Exceptions\RequireAdminException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -132,8 +135,41 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
         );
 
         $this->request = $request;
-        $response = $this->getClient()->send($request);
-        return $this->parseData($response);
+
+        try {
+            $response = $this->getClient()->send($request);
+            return $this->parseData($response);
+        } catch (ClientException $e) {
+            switch ($e->getCode()) {
+                case 401:
+                    $reason = null;
+                    $headers = $e->getResponse()->getHeaders();
+                    if (isset($headers['X-401-Reason'], $headers['X-401-Reason'][0])) {
+                        $reason = $headers['X-401-Reason'][0];
+                    }
+
+                    throw new AuthenticationFailedException($this->request, $e->getResponse(), $reason);
+                    break;
+                case 404:
+                    $headers = $e->getResponse()->getHeaders();
+                    if (isset($headers['X-404-Reason'], $headers['X-404-Reason'][0]) && $headers['X-404-Reason'][0] == 'admin_required') {
+                        throw new RequireAdminException($this->request, $e->getResponse(), 'admin_required');
+                    }
+
+                    $reason = null;
+                    if (isset($headers['X-404-Reason'], $headers['X-404-Reason'][0])) {
+                        $reason = $headers['X-404-Reason'][0];
+                    }
+
+                    throw new Exception($this->request, $e->getResponse(), $reason);
+                    break;
+                default:
+                    throw new Exception($this->request, $e->getResponse());
+                    break;
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -198,10 +234,9 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
                 return $data;
             }
 
-            throw new BodyNotJsonException($response, $this->request);
+            throw new BodyNotJsonException($this->request, $response);
+
         // @codeCoverageIgnoreStart
-        } catch (ClientException $e) {
-            throw $e;
         } catch (\Exception $e) {
             throw $e;
         }
