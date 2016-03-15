@@ -13,10 +13,8 @@
 namespace Lsv\Timeharvest\Task;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
-use Lsv\Timeharvest\DocumentInterface;
 use Lsv\Timeharvest\Task\Document\Task;
 use Lsv\Timeharvest\Task\Document\TaskDetails;
-use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

@@ -48,7 +48,7 @@ class GetTimeReportingTest extends AbstractTest
         $client = $this->getHttpClient($mocks);
 
         $from = (new \DateTime())->modify('-2 days');
-        $to = new DateTime();
+        $to = new \DateTime();
 
         $getter = new GetTimeReporting($this->getAuth(), [
             'httpclient' => $client,

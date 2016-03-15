@@ -10,17 +10,17 @@
  *
  */
 
-namespace Lsv\Timeharvest\User;
+namespace Lsv\Timeharvest\Me;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
-use Lsv\Timeharvest\User\Document\UserDetail;
+use Lsv\Timeharvest\Me\Document\UserDetail;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Get user
  * @package Lsv\Timeharvest\User
  */
-class GetUser extends AbstractTimeharvest
+class GetMe extends AbstractTimeharvest
 {
 
     /**

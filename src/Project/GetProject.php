@@ -14,7 +14,6 @@ namespace Lsv\Timeharvest\Project;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\Client\Document\ClientDetails;
-use Lsv\Timeharvest\DocumentInterface;
 use Lsv\Timeharvest\Project\Document\Project;
 use Lsv\Timeharvest\Project\Document\ProjectDetails;
 use Symfony\Component\OptionsResolver\Options;

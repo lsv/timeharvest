@@ -10,7 +10,7 @@
  *
  */
 
-namespace Lsv\Timeharvest\User\Document;
+namespace Lsv\Timeharvest\Me\Document;
 
 /**
  * User document

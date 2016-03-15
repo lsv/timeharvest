@@ -3,8 +3,8 @@ namespace Lsv\TimeharvestTest\User;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\User\Document\UserDetail;
-use Lsv\Timeharvest\User\GetUser;
+use Lsv\Timeharvest\Me\Document\UserDetail;
+use Lsv\Timeharvest\Me\GetMe;
 use Lsv\TimeharvestTest\AbstractTest;
 
 class GetUserTest extends AbstractTest
@@ -16,7 +16,7 @@ class GetUserTest extends AbstractTest
             new Response(200, ['Content-Type' => 'application/json'], file_get_contents(__DIR__ . '/json/user.json')),
         ]);
 
-        $action = new GetUser($this->getAuth(), [
+        $action = new GetMe($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks)
         ]);
 
@@ -60,7 +60,7 @@ class GetUserTest extends AbstractTest
             new Response(200, ['Content-Type' => 'application/json'], file_get_contents(__DIR__ . '/json/user.json')),
         ]);
 
-        $action = new GetUser($this->getAuth(), [
+        $action = new GetMe($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks)
         ]);
 
@@ -102,7 +102,7 @@ class GetUserTest extends AbstractTest
             new Response(200, ['Content-Type' => 'application/json'], file_get_contents(__DIR__ . '/json/user.json')),
         ]);
 
-        $action = new GetUser($this->getAuth(), [
+        $action = new GetMe($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks)
         ]);
 
