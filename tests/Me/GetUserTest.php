@@ -1,5 +1,5 @@
 <?php
-namespace Lsv\TimeharvestTest\User;
+namespace Lsv\TimeharvestTest\Me;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
