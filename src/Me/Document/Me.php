@@ -15,10 +15,10 @@ namespace Lsv\Timeharvest\Me\Document;
 use Lsv\Timeharvest\DocumentInterface;
 
 /**
- * Class UserDetail
- * @package Lsv\Timeharvest\User\Document
+ * Class Me
+ * @package Lsv\Timeharvest\Me\Document
  */
-class UserDetail implements DocumentInterface
+class Me implements DocumentInterface
 {
 
     /**
@@ -43,7 +43,7 @@ class UserDetail implements DocumentInterface
 
     /**
      * @param Company $company
-     * @return UserDetail
+     * @return Me
      */
     public function setCompany($company)
     {
@@ -61,7 +61,7 @@ class UserDetail implements DocumentInterface
 
     /**
      * @param User $user
-     * @return UserDetail
+     * @return Me
      */
     public function setUser($user)
     {

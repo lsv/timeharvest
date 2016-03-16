@@ -3,19 +3,13 @@ namespace Lsv\Timeharvest\User;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\DocumentInterface;
+use Lsv\Timeharvest\User\Document\User;
+use Lsv\Timeharvest\User\Document\UserDetails;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GetUsers extends AbstractTimeharvest
 {
-
-    /**
-     * Generate the response
-     * @return DocumentInterface
-     */
-    public function getResponse()
-    {
-        // TODO: Implement getResponse() method.
-    }
 
     /**
      * Configure options
@@ -24,7 +18,23 @@ class GetUsers extends AbstractTimeharvest
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
-        // TODO: Implement configureOptions() method.
+        $resolver->setDefault('updated', null);
+        $resolver->setAllowedTypes('updated', ['null', \DateTime::class]);
+        $resolver->setNormalizer('updated', function (Options $options, $value) {
+            if ($value instanceof \DateTime) {
+                return $value->format('Y-m-d H:i');
+            }
+            return null;
+        });
+    }
+
+    /**
+     * Generate the response
+     * @return UserDetails[]
+     */
+    public function getResponse()
+    {
+        return $this->doResponse();
     }
 
     /**
@@ -34,7 +44,10 @@ class GetUsers extends AbstractTimeharvest
      */
     protected function getUrl(array $options)
     {
-        // TODO: Implement getUrl() method.
+        return sprintf(
+            'people%s',
+            $options['updated'] ? '?updated_since=' . urlencode($options['updated']) : ''
+        );
     }
 
     /**
@@ -43,6 +56,19 @@ class GetUsers extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        // TODO: Implement getDocumentClass() method.
+        return new User();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function afterParseData(&$data)
+    {
+        $output = [];
+        /** @var User $item */
+        foreach ($data as $item) {
+            $output[] = $item->getUser();
+        }
+        $data = $output;
     }
 }

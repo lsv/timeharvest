@@ -3,7 +3,7 @@ namespace Lsv\TimeharvestTest\Project;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\Client\Document\ClientDetails;
+use Lsv\Timeharvest\Client\Document\Client;
 use Lsv\Timeharvest\Project\GetProjects;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
@@ -59,7 +59,7 @@ class GetProjectsTimeHarvestTest extends AbstractTimeHarvestTest
 
         $client = $this->getHttpClient($mocks);
 
-        $projectclient = new ClientDetails();
+        $projectclient = new Client();
         $projectclient->setId(123123);
         $getter = new GetProjects($this->getAuth(), [
             'httpclient' => $client,
@@ -83,7 +83,7 @@ class GetProjectsTimeHarvestTest extends AbstractTimeHarvestTest
         $client = $this->getHttpClient($mocks);
 
         $date = new \DateTime();
-        $projectclient = new ClientDetails();
+        $projectclient = new Client();
         $projectclient->setId(123123);
         $getter = new GetProjects($this->getAuth(), [
             'httpclient' => $client,

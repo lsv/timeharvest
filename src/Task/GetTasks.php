@@ -13,8 +13,8 @@
 namespace Lsv\Timeharvest\Task;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
+use Lsv\Timeharvest\Task\Document\TaskSetter;
 use Lsv\Timeharvest\Task\Document\Task;
-use Lsv\Timeharvest\Task\Document\TaskDetails;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +27,7 @@ class GetTasks extends AbstractTimeharvest
 
     /**
      * {@inheritdoc}
-     * @return TaskDetails[]
+     * @return Task[]
      */
     public function getResponse()
     {
@@ -47,7 +47,6 @@ class GetTasks extends AbstractTimeharvest
             }
             return null;
         });
-        return $resolver;
     }
 
     /**
@@ -67,7 +66,7 @@ class GetTasks extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        return new Task();
+        return new TaskSetter();
     }
 
     /**
@@ -76,7 +75,7 @@ class GetTasks extends AbstractTimeharvest
     protected function afterParseData(&$data)
     {
         $output = [];
-        /** @var Task $item */
+        /** @var TaskSetter $item */
         foreach ($data as $item) {
             $output[] = $item->getTask();
         }

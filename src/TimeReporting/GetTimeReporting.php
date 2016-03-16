@@ -3,9 +3,9 @@ namespace Lsv\Timeharvest\TimeReporting;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\DocumentInterface;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
+use Lsv\Timeharvest\Project\Document\Project;
+use Lsv\Timeharvest\TimeReporting\Document\TimeReportSetter;
 use Lsv\Timeharvest\TimeReporting\Document\TimeReport;
-use Lsv\Timeharvest\TimeReporting\Document\TimeReportDetails;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,9 +21,9 @@ class GetTimeReporting extends AbstractTimeharvest
     {
         $resolver->setRequired(['project', 'from', 'to']);
 
-        $resolver->setAllowedTypes('project', ['int', ProjectDetails::class]);
+        $resolver->setAllowedTypes('project', ['int', Project::class]);
         $resolver->setNormalizer('project', function (Options $options, $value) {
-            if ($value instanceof ProjectDetails) {
+            if ($value instanceof Project) {
                 return $value->getId();
             }
             return $value;
@@ -38,13 +38,11 @@ class GetTimeReporting extends AbstractTimeharvest
         $resolver->setNormalizer('to', function (Options $options, \DateTime $value) {
             return $value->format('Ymd');
         });
-
-        return $resolver;
     }
 
     /**
      * Generate the response
-     * @return TimeReportDetails[]
+     * @return TimeReport[]
      */
     public function getResponse()
     {
@@ -72,7 +70,7 @@ class GetTimeReporting extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        return new TimeReport();
+        return new TimeReportSetter();
     }
 
     /**
@@ -81,7 +79,7 @@ class GetTimeReporting extends AbstractTimeharvest
     protected function afterParseData(&$data)
     {
         $output = [];
-        /** @var TimeReport $item */
+        /** @var TimeReportSetter $item */
         foreach ($data as $item) {
             $output[] = $item->getDayEntry();
         }

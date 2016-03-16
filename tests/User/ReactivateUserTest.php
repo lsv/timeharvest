@@ -3,56 +3,56 @@ namespace Lsv\TimeharvestTest\User;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\User\DeleteUser;
 use Lsv\Timeharvest\User\Document\UserDetails;
+use Lsv\Timeharvest\User\ReactivateUser;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
-class DeleteUserTest extends AbstractTimeHarvestTest
+class ReactivateUserTest extends AbstractTimeHarvestTest
 {
 
-    public function test_can_delete_user_userobject()
+    public function test_can_reactivate_user_userobject()
     {
         $mocks = new MockHandler([
             new Response(200),
         ]);
 
-        $action = new DeleteUser($this->getAuth(), [
+        $action = new ReactivateUser($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks),
             'user' => (new UserDetails())->setId(1234),
         ]);
 
         $response = $action->getResponse();
-        $this->assertEquals(1234, $response);
+        $this->assertEquals('User activated or deactivated', $response);
     }
 
-    public function test_can_delete_user()
+    public function test_can_reactivate_user()
     {
         $mocks = new MockHandler([
             new Response(200),
         ]);
 
-        $action = new DeleteUser($this->getAuth(), [
+        $action = new ReactivateUser($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks),
             'user' => 4321,
         ]);
 
         $response = $action->getResponse();
-        $this->assertEquals(4321, $response);
+        $this->assertEquals('User activated or deactivated', $response);
     }
 
-    public function test_can_not_delete_user()
+    public function test_can_not_reactivate_user()
     {
         $mocks = new MockHandler([
-            new Response(204),
+            new Response(400),
         ]);
 
-        $action = new DeleteUser($this->getAuth(), [
+        $action = new ReactivateUser($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks),
-            'user' => 234,
+            'user' => 4321,
         ]);
 
         $response = $action->getResponse();
-        $this->assertEquals('User not deleted, maybe archive the user instead', $response);
+        $this->assertEquals('User could not be activated or deactivated', $response);
     }
 
 }

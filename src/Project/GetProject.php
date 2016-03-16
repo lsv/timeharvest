@@ -13,9 +13,9 @@
 namespace Lsv\Timeharvest\Project;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
-use Lsv\Timeharvest\Client\Document\ClientDetails;
+use Lsv\Timeharvest\Client\Document\Client;
+use Lsv\Timeharvest\Project\Document\ProjectSetter;
 use Lsv\Timeharvest\Project\Document\Project;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,7 +28,7 @@ class GetProject extends AbstractTimeharvest
 
     /**
      * {@inheritdoc}
-     * @return ClientDetails
+     * @return Client
      */
     public function getResponse()
     {
@@ -41,14 +41,13 @@ class GetProject extends AbstractTimeharvest
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('project');
-        $resolver->setAllowedTypes('project', ['int', ProjectDetails::class]);
+        $resolver->setAllowedTypes('project', ['int', Project::class]);
         $resolver->setNormalizer('project', function (Options $options, $value) {
-            if ($value instanceof ProjectDetails) {
+            if ($value instanceof Project) {
                 return $value->getId();
             }
             return $value;
         });
-        return $resolver;
     }
 
     /**
@@ -64,7 +63,7 @@ class GetProject extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        return new Project();
+        return new ProjectSetter();
     }
 
     /**
@@ -72,7 +71,7 @@ class GetProject extends AbstractTimeharvest
      */
     protected function afterParseData(&$data)
     {
-        /** @var Project $data */
+        /** @var ProjectSetter $data */
         $data = $data->getProject();
     }
 }

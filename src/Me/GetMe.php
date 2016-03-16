@@ -13,7 +13,7 @@
 namespace Lsv\Timeharvest\Me;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
-use Lsv\Timeharvest\Me\Document\UserDetail;
+use Lsv\Timeharvest\Me\Document\Me;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -25,7 +25,7 @@ class GetMe extends AbstractTimeharvest
 
     /**
      * {@inheritdoc}
-     * @return UserDetail
+     * @return Me
      */
     public function getResponse()
     {
@@ -38,7 +38,6 @@ class GetMe extends AbstractTimeharvest
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('_method', 'POST');
-        return $resolver;
     }
 
     /**
@@ -54,6 +53,6 @@ class GetMe extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        return new UserDetail();
+        return new Me();
     }
 }

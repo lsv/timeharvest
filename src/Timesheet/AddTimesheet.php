@@ -14,8 +14,8 @@ namespace Lsv\Timeharvest\Timesheet;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\DocumentInterface;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
-use Lsv\Timeharvest\Task\Document\TaskDetails;
+use Lsv\Timeharvest\Project\Document\Project;
+use Lsv\Timeharvest\Task\Document\Task;
 use Lsv\Timeharvest\Timesheet\Document\Timesheet;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -58,18 +58,18 @@ class AddTimesheet extends AbstractTimeharvest
         $resolver->addAllowedTypes('hours', ['int', 'float']);
 
         $resolver->setRequired('project');
-        $resolver->addAllowedTypes('project', ['int', ProjectDetails::class]);
+        $resolver->addAllowedTypes('project', ['int', Project::class]);
         $resolver->setNormalizer('project', function (Options $option, $value) {
-            if ($value instanceof ProjectDetails) {
+            if ($value instanceof Project) {
                 return $value->getId();
             }
             return $value;
         });
 
         $resolver->setRequired('task');
-        $resolver->addAllowedTypes('task', ['int', TaskDetails::class]);
+        $resolver->addAllowedTypes('task', ['int', Task::class]);
         $resolver->setNormalizer('task', function (Options $option, $value) {
-            if ($value instanceof TaskDetails) {
+            if ($value instanceof Task) {
                 return $value->getId();
             }
             return $value;
@@ -84,8 +84,6 @@ class AddTimesheet extends AbstractTimeharvest
 
         $resolver->setDefault('notes', null);
         $resolver->addAllowedTypes('notes', ['string', 'null']);
-
-        return $resolver;
     }
 
     /**

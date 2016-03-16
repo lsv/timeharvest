@@ -3,7 +3,7 @@ namespace Lsv\TimeharvestTest\TimeReporting;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
+use Lsv\Timeharvest\Project\Document\Project;
 use Lsv\Timeharvest\TimeReporting\GetTimeReporting;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 use Nette\Utils\DateTime;
@@ -52,7 +52,7 @@ class GetTimeReportingTimeHarvestTest extends AbstractTimeHarvestTest
 
         $getter = new GetTimeReporting($this->getAuth(), [
             'httpclient' => $client,
-            'project' => (new ProjectDetails())->setId(4321),
+            'project' => (new Project())->setId(4321),
             'from' => $from,
             'to' => $to
         ]);
@@ -105,7 +105,7 @@ class GetTimeReportingTimeHarvestTest extends AbstractTimeHarvestTest
 
         $response = (new GetTimeReporting($this->getAuth(), [
             'httpclient' => $client,
-            'project' => (new ProjectDetails())->setId(4321),
+            'project' => (new Project())->setId(4321),
             'from' => $from,
             'to' => $to
         ]))->getResponse()[0];

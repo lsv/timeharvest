@@ -14,8 +14,8 @@
 namespace Lsv\Timeharvest\Client;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
+use Lsv\Timeharvest\Client\Document\ClientSetter;
 use Lsv\Timeharvest\Client\Document\Client;
-use Lsv\Timeharvest\Client\Document\ClientDetails;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,7 +28,7 @@ class GetClient extends AbstractTimeharvest
 
     /**
      * {@inheritdoc}
-     * @return ClientDetails
+     * @return Client
      */
     public function getResponse()
     {
@@ -41,9 +41,9 @@ class GetClient extends AbstractTimeharvest
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('client');
-        $resolver->setAllowedTypes('client', ['int', ClientDetails::class]);
+        $resolver->setAllowedTypes('client', ['int', Client::class]);
         $resolver->setNormalizer('client', function (Options $options, $value) {
-            if ($value instanceof ClientDetails) {
+            if ($value instanceof Client) {
                 return $value->getId();
             }
             return $value;
@@ -64,7 +64,7 @@ class GetClient extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        return new Client();
+        return new ClientSetter();
     }
 
     /**
@@ -72,7 +72,7 @@ class GetClient extends AbstractTimeharvest
      */
     protected function afterParseData(&$data)
     {
-        /** @var Client $data */
+        /** @var ClientSetter $data */
         $data = $data->getClient();
     }
 }

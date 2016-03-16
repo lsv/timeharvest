@@ -3,7 +3,7 @@ namespace Lsv\TimeharvestTest\Me;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\Me\Document\UserDetail;
+use Lsv\Timeharvest\Me\Document\Me;
 use Lsv\Timeharvest\Me\GetMe;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
@@ -23,7 +23,7 @@ class GetUserTimeHarvestTest extends AbstractTimeHarvestTest
         $response = $action->getResponse();
         $request = $action->getRequest();
 
-        $this->assertInstanceOf(UserDetail::class, $response);
+        $this->assertInstanceOf(Me::class, $response);
         $this->assertEquals('/account/who_am_i', $request->getUri()->getPath());
     }
 

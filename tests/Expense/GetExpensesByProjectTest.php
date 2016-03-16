@@ -4,7 +4,7 @@ namespace Lsv\TimeharvestTest\Expense;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Lsv\Timeharvest\Expense\GetExpensesByProject;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
+use Lsv\Timeharvest\Project\Document\Project;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
 class GetExpensesByProjectTimeHarvestTest extends AbstractTimeHarvestTest
@@ -51,7 +51,7 @@ class GetExpensesByProjectTimeHarvestTest extends AbstractTimeHarvestTest
             'httpclient' => $client,
             'from' => $from,
             'to' => $to,
-            'project' => (new ProjectDetails())->setId(1234)
+            'project' => (new Project())->setId(1234)
         ]);
 
         $response = $getter->getResponse();
@@ -104,7 +104,7 @@ class GetExpensesByProjectTimeHarvestTest extends AbstractTimeHarvestTest
 
         $response = (new GetExpensesByProject($this->getAuth(), [
             'httpclient' => $client,
-            'project' => (new ProjectDetails())->setId(4321),
+            'project' => (new Project())->setId(4321),
             'from' => $from,
             'to' => $to
         ]))->getResponse()[0];

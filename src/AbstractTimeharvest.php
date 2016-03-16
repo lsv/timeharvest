@@ -57,7 +57,6 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
     /**
      * Configure options
      * @param OptionsResolver $resolver
-     * @return OptionsResolver
      */
     abstract protected function configureOptions(OptionsResolver $resolver);
 
@@ -83,7 +82,7 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired('_method');
-        $resolver->setAllowedValues('_method', ['GET', 'POST', 'DELETE']);
+        $resolver->setAllowedValues('_method', ['GET', 'POST', 'DELETE', 'PUT']);
         $resolver->setDefault('_method', 'GET');
 
         $resolver->setRequired('httpclient');
@@ -100,7 +99,7 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
         }
         // @codeCoverageIgnoreEnd
 
-        $resolver = $this->configureOptions($resolver);
+        $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
 
@@ -167,11 +166,8 @@ abstract class AbstractTimeharvest implements TimeHarvestInterface
                     throw new Exception($this->request, $e->getResponse(), $reason);
                     break;
                 default:
-                    throw new Exception($this->request, $e->getResponse());
-                    break;
+                    return $this->parseData($e->getResponse());
             }
-        } catch (\Exception $e) {
-            throw $e;
         }
     }
 

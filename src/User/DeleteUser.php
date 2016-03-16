@@ -3,10 +3,11 @@ namespace Lsv\Timeharvest\User;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\DocumentInterface;
-use Lsv\Timeharvest\Exceptions\Exception;
+use Lsv\Timeharvest\User\Document\UserDetails;
 use Lsv\Timeharvest\User\Exceptions\UserDeletedException;
 use Lsv\Timeharvest\User\Exceptions\UserNotDeletedException;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeleteUser extends AbstractTimeharvest
@@ -24,14 +25,18 @@ class DeleteUser extends AbstractTimeharvest
     /**
      * Configure options
      * @param OptionsResolver $resolver
-     * @return OptionsResolver
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('_method', 'DELETE');
         $resolver->setRequired('user');
-        $resolver->setAllowedTypes('user', ['int']);
-        return $resolver;
+        $resolver->setAllowedTypes('user', ['int', UserDetails::class]);
+        $resolver->setNormalizer('user', function (Options $options, $value) {
+            if ($value instanceof UserDetails) {
+                return $value->getId();
+            }
+            return $value;
+        });
     }
 
     /**

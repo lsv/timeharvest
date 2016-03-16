@@ -4,8 +4,8 @@ namespace Lsv\TimeharvestTest\User;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use JMS\Serializer\SerializerBuilder;
+use Lsv\Timeharvest\User\Document\CreateUser\CreateUserSetter;
 use Lsv\Timeharvest\User\Document\CreateUser\CreateUser;
-use Lsv\Timeharvest\User\Document\CreateUser\CreateUserDetails;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
 class CreateUserTimeHarvestTest extends AbstractTimeHarvestTest
@@ -13,7 +13,7 @@ class CreateUserTimeHarvestTest extends AbstractTimeHarvestTest
 
     public function test_create_user_serializer()
     {
-        $details = new CreateUserDetails();
+        $details = new CreateUser();
         $details
             ->setEmail('myemail@mail.com')
             ->setFirstname('firstname')
@@ -43,7 +43,7 @@ class CreateUserTimeHarvestTest extends AbstractTimeHarvestTest
         $this->assertEquals(25.22, $details->getCostrate());
 
         $serializer = SerializerBuilder::create()->build();
-        $serialized = $serializer->serialize((new CreateUser())->setUser($details), 'json');
+        $serialized = $serializer->serialize((new CreateUserSetter())->setUser($details), 'json');
         $jsonArray = json_decode($serialized, true);
 
         $this->assertArrayHasKey('user', $jsonArray);
@@ -79,7 +79,7 @@ class CreateUserTimeHarvestTest extends AbstractTimeHarvestTest
         ]);
 
         $response = $action->getResponse();
-        $this->assertInstanceOf(CreateUserDetails::class, $response);
+        $this->assertInstanceOf(CreateUser::class, $response);
     }
 
     /**

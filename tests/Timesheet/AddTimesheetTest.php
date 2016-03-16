@@ -3,8 +3,8 @@ namespace Lsv\TimeharvestTest\Timesheet;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
-use Lsv\Timeharvest\Task\Document\TaskDetails;
+use Lsv\Timeharvest\Project\Document\Project;
+use Lsv\Timeharvest\Task\Document\Task;
 use Lsv\Timeharvest\Timesheet\AddTimesheet;
 use Lsv\Timeharvest\Timesheet\Document\Timesheet;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
@@ -21,8 +21,8 @@ class AddTimesheetTimeHarvestTest extends AbstractTimeHarvestTest
         $action = new AddTimesheet($this->getAuth(), [
             'httpclient' => $this->getHttpClient($mocks),
             'hours' => 2.5,
-            'project' => (new ProjectDetails())->setId(123123),
-            'task' => (new TaskDetails())->setId(456456),
+            'project' => (new Project())->setId(123123),
+            'task' => (new Task())->setId(456456),
         ]);
 
         $response = $action->getResponse();

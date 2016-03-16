@@ -3,7 +3,7 @@ namespace Lsv\TimeharvestTest\Task;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\Task\Document\TaskDetails;
+use Lsv\Timeharvest\Task\Document\Task;
 use Lsv\Timeharvest\Task\GetTask;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
 
@@ -26,7 +26,7 @@ class GetTaskTimeHarvestTest extends AbstractTimeHarvestTest
     {
         $action = $this->createRequest(123);
         $response = $action->getResponse();
-        $this->assertInstanceOf(TaskDetails::class, $response);
+        $this->assertInstanceOf(Task::class, $response);
 
         $request = $action->getRequest();
         $this->assertEquals('/tasks/123', $request->getUri()->getPath());
@@ -34,9 +34,9 @@ class GetTaskTimeHarvestTest extends AbstractTimeHarvestTest
 
     public function test_get_tasks_from_class()
     {
-        $action = $this->createRequest((new TaskDetails())->setId(121212));
+        $action = $this->createRequest((new Task())->setId(121212));
         $response = $action->getResponse();
-        $this->assertInstanceOf(TaskDetails::class, $response);
+        $this->assertInstanceOf(Task::class, $response);
 
         $request = $action->getRequest();
         $this->assertEquals('/tasks/121212', $request->getUri()->getPath());

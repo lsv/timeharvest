@@ -3,7 +3,7 @@ namespace Lsv\TimeharvestTest\Client;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use Lsv\Timeharvest\Client\Document\ClientDetails;
+use Lsv\Timeharvest\Client\Document\Client;
 use Lsv\Timeharvest\Client\GetClient;
 use Lsv\Timeharvest\Client\GetClients;
 use Lsv\TimeharvestTest\AbstractTimeHarvestTest;
@@ -27,7 +27,7 @@ class GetClientTimeHarvestTest extends AbstractTimeHarvestTest
     {
         $action = $this->createRequest(123);
         $response = $action->getResponse();
-        $this->assertInstanceOf(ClientDetails::class, $response);
+        $this->assertInstanceOf(Client::class, $response);
 
         $request = $action->getRequest();
         $this->assertEquals('/clients/123', $request->getUri()->getPath());
@@ -35,9 +35,9 @@ class GetClientTimeHarvestTest extends AbstractTimeHarvestTest
 
     public function test_get_client_from_class()
     {
-        $action = $this->createRequest((new ClientDetails())->setId(121212));
+        $action = $this->createRequest((new Client())->setId(121212));
         $response = $action->getResponse();
-        $this->assertInstanceOf(ClientDetails::class, $response);
+        $this->assertInstanceOf(Client::class, $response);
 
         $request = $action->getRequest();
         $this->assertEquals('/clients/121212', $request->getUri()->getPath());

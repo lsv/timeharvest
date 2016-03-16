@@ -6,7 +6,7 @@ use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\DocumentInterface;
 use Lsv\Timeharvest\Exceptions\Exception;
 use Lsv\Timeharvest\User\Document\CreateUser\CreateUser as CreateUserDocument;
-use Lsv\Timeharvest\User\Document\CreateUser\CreateUserDetails;
+use Lsv\Timeharvest\User\Document\CreateUser\CreateUserSetter;
 use Lsv\Timeharvest\User\Exceptions\UserCreatedException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -59,7 +59,6 @@ class CreateUser extends AbstractTimeharvest
 
         $resolver->setAllowedTypes('costrate', ['float', 'int', 'null']);
         $resolver->setDefault('costrate', null);
-        return $resolver;
     }
 
     /**
@@ -117,7 +116,7 @@ class CreateUser extends AbstractTimeharvest
      */
     private function createUserDetail(array $options)
     {
-        $details = new CreateUserDetails();
+        $details = new CreateUserDocument();
         $details
             ->setEmail($options['email'])
             ->setFirstname($options['firstname'])
@@ -132,6 +131,6 @@ class CreateUser extends AbstractTimeharvest
             ->setDepartment($options['department'])
             ->setCostrate($options['costrate'])
         ;
-        return (new CreateUserDocument())->setUser($details);
+        return (new CreateUserSetter())->setUser($details);
     }
 }

@@ -3,9 +3,9 @@ namespace Lsv\Timeharvest\Expense;
 
 use Lsv\Timeharvest\AbstractTimeharvest;
 use Lsv\Timeharvest\DocumentInterface;
-use Lsv\Timeharvest\Expense\Document\Expense;
-use Lsv\Timeharvest\Project\Document\ProjectDetails;
-use Lsv\Timeharvest\TimeReporting\Document\TimeReportDetails;
+use Lsv\Timeharvest\Expense\Document\ExpenseSetter;
+use Lsv\Timeharvest\Project\Document\Project;
+use Lsv\Timeharvest\TimeReporting\Document\TimeReport;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,9 +21,9 @@ class GetExpensesByProject extends AbstractTimeharvest
     {
         $resolver->setRequired(['from', 'to', 'project']);
 
-        $resolver->setAllowedTypes('project', ['int', ProjectDetails::class]);
+        $resolver->setAllowedTypes('project', ['int', Project::class]);
         $resolver->setNormalizer('project', function (Options $options, $value) {
-            if ($value instanceof ProjectDetails) {
+            if ($value instanceof Project) {
                 return $value->getId();
             }
             return $value;
@@ -50,7 +50,7 @@ class GetExpensesByProject extends AbstractTimeharvest
 
     /**
      * Generate the response
-     * @return TimeReportDetails[]
+     * @return TimeReport[]
      */
     public function getResponse()
     {
@@ -79,7 +79,7 @@ class GetExpensesByProject extends AbstractTimeharvest
      */
     protected function getDocumentClass()
     {
-        return new Expense();
+        return new ExpenseSetter();
     }
 
     /**
@@ -88,7 +88,7 @@ class GetExpensesByProject extends AbstractTimeharvest
     protected function afterParseData(&$data)
     {
         $output = [];
-        /** @var Expense $item */
+        /** @var ExpenseSetter $item */
         foreach ($data as $item) {
             $output[] = $item->getExpense();
         }
