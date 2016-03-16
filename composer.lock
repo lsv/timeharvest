@@ -1981,16 +1981,16 @@
         },
         {
             "name": "pdepend/pdepend",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pdepend/pdepend.git",
-                "reference": "9d816dfa565b9c47685057761acaf432c9e8066a"
+                "reference": "b086687f3a01dc6bb92d633aef071d2c5dd0db06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/9d816dfa565b9c47685057761acaf432c9e8066a",
-                "reference": "9d816dfa565b9c47685057761acaf432c9e8066a",
+                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/b086687f3a01dc6bb92d633aef071d2c5dd0db06",
+                "reference": "b086687f3a01dc6bb92d633aef071d2c5dd0db06",
                 "shasum": ""
             },
             "require": {
@@ -2017,20 +2017,20 @@
                 "BSD-3-Clause"
             ],
             "description": "Official version of pdepend to be handled with Composer",
-            "time": "2016-02-23 08:20:26"
+            "time": "2016-03-10 15:15:04"
         },
         {
             "name": "phing/phing",
-            "version": "2.13.0",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phingofficial/phing.git",
-                "reference": "a5b10a50160c8a4744545aacb33ef158349e655c"
+                "reference": "7dd73c83c377623def54b58121f46b4dcb35dd61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/a5b10a50160c8a4744545aacb33ef158349e655c",
-                "reference": "a5b10a50160c8a4744545aacb33ef158349e655c",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/7dd73c83c377623def54b58121f46b4dcb35dd61",
+                "reference": "7dd73c83c377623def54b58121f46b4dcb35dd61",
                 "shasum": ""
             },
             "require": {
@@ -2039,6 +2039,7 @@
             "require-dev": {
                 "ext-pdo_sqlite": "*",
                 "lastcraft/simpletest": "@dev",
+                "mikey179/vfsstream": "^1.6",
                 "pdepend/pdepend": "2.x",
                 "pear/archive_tar": "1.4.x",
                 "pear/http_request2": "dev-trunk",
@@ -2074,7 +2075,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.13.x-dev"
+                    "dev-master": "2.14.x-dev"
                 }
             },
             "autoload": {
@@ -2107,7 +2108,7 @@
                 "task",
                 "tool"
             ],
-            "time": "2015-12-04 09:45:44"
+            "time": "2016-03-10 21:39:23"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -2213,16 +2214,16 @@
         },
         {
             "name": "phpmd/phpmd",
-            "version": "2.4.1",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "1ce4c586f4071d27a82421e56ae0e9864c89094d"
+                "reference": "fccbdb6b222f6d7a6d35af1c396ba5435cec76a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/1ce4c586f4071d27a82421e56ae0e9864c89094d",
-                "reference": "1ce4c586f4071d27a82421e56ae0e9864c89094d",
+                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/fccbdb6b222f6d7a6d35af1c396ba5435cec76a9",
+                "reference": "fccbdb6b222f6d7a6d35af1c396ba5435cec76a9",
                 "shasum": ""
             },
             "require": {
@@ -2274,7 +2275,7 @@
                 "phpmd",
                 "pmd"
             ],
-            "time": "2016-03-08 21:43:36"
+            "time": "2016-03-10 17:17:44"
         },
         {
             "name": "phpspec/prophecy",
@@ -2581,16 +2582,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.2.10",
+            "version": "5.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "37fa29b17b87a3e9f0a4d77c42f0aac5183b84d1"
+                "reference": "6f0948bab32270352f97d1913d82a49338dcb0da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/37fa29b17b87a3e9f0a4d77c42f0aac5183b84d1",
-                "reference": "37fa29b17b87a3e9f0a4d77c42f0aac5183b84d1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6f0948bab32270352f97d1913d82a49338dcb0da",
+                "reference": "6f0948bab32270352f97d1913d82a49338dcb0da",
                 "shasum": ""
             },
             "require": {
@@ -2651,7 +2652,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-03-03 08:52:58"
+            "time": "2016-03-15 05:59:58"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
