@@ -1,0 +1,93 @@
+- Clients API
+    - ~~Get All Clients~~
+    - ~~Get A Single Client~~
+    - Create A New Client
+    - Update A Client
+    - Activate Or Deactivate An Existing Client
+    - Delete A Client
+    - Get All Contacts
+    - Get All Contacts For A Client
+    - Get A Client Contact
+    - Create A New Client Contact
+    - Update A Client Contact
+    - Delete A Client Contact
+- Invoices & Estimates API
+    - Create An Invoice
+      - Create An Invoice
+      - Free Form Invoice
+    - Show & Update Invoices
+        - Show Recently Created Invoices
+        - Show A Single Invoice
+        - Client Dashboard
+        - Update Existing Invoice
+        - Delete Existing Invoice
+    - Invoice Messages & Payments
+        - Show Invoice Messages
+        - Send An Invoice
+        - Delete Existing Message
+        - Mark An Invoice As Sent
+        - Write An Invoice Off
+        - Re-open An Invoice
+        - Change A Sent Invoice To Draft
+        - Show All Categories
+        - Create New Category
+        - Update Existing Category
+        - Delete A Category
+        - Show Payments For An Invoice
+        - Create A New Payment
+        - Delete Existing Payment
+- Expenses API
+    - Add & Update Expenses
+        - Create A New Expense
+        - Update An Existing Expense
+        - ~~Show An Expense~~
+        - Delete An Existing Expense
+        - Attach Receipt Image
+        - Show A Receipt Image
+        - Expenses For Other Users
+        - Locked Expenses
+    - Expense Categories
+        - Show All Categories
+        - Create New Expense Category
+        - Update Expense Category
+        - Delete Expense Category
+- Timesheets API
+    - Add & Update Time Entries
+        - ~~Creating An Entry~~
+        - Toggling A Timer
+        - Deleting An Entry
+        - Updating An Entry
+        - Working With Timesheets For Other Users
+        - Working With Locked Timesheets
+    - Retrieve Existing Time Entries
+        - Retrieve Entries For The Current Day
+        - Retrieve Entries For A Specific Date
+        - Retrieving A Single Entry
+- Projects API
+    - Create & Show Projects
+        - ~~Show A Project~~
+        - ~~Show All Projects~~
+        - Create A New Project
+        - Update An Existing Project
+        - (De)Activate An Existing Project
+        - Delete A Project
+- Reports API
+    - Time Reporting
+        - ~~All Entries For Project Timeframe~~
+        - All Project Entries By User For Timeframe
+    - Expense Reporting
+        - All Project Expense Entries For Timeframe
+- Tasks API
+    - Create & Show Tasks
+        - Show One Task
+        - Show All Tasks
+        - Create New Task
+        - Archive/Delete A Task
+        - Update A Task
+        - Reactivate A Task
+    - Task Assignments
+        - All Assigned Tasks To Project
+        - Get One Task Assignment
+        - Assign Task To A Project
+        - Removing A Task From A Project
+        - Updating A Task Assignment For A Project
